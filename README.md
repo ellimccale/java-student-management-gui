@@ -1,2 +1,4 @@
-# java-student-management-gui
-CSIS-1410: Object-Oriented Programming, Final Group Project
+# Student Database System
+## CSIS-1410: Object-Oriented Programming, Final Group Project
+
+The Student Database System is a Java-based desktop application designed to manage student records through a graphical user interface (GUI). The system allows users to add, edit, and delete student information stored in a tabular format, leveraging JPanel components to display and organize data. The core application structure includes three primary classes: Student, representing individual student entries with properties like UUID, student ID, first and last names, major, and academic year; StudentPanel, extending JPanel for rendering student details; and Action, an interface extending JButton for defining operations such as adding, editing, and deleting student records. The application utilizes a generic collection to cache and manage student data efficiently, with file I/O operations to read from and write to a CSV file.
