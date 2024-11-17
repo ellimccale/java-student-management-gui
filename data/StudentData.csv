@@ -1,14 +1,14 @@
 student_id,first_name,last_name,major,year
-101001,Sylvia,Ashbaugh,Biotechnology,2021
-101002,Louella,Gilroy,Interior Design,2022
-101003,Khaldun,Nassar,Physical Therapy,2020
-101004,Katherine,Blum,Dental Hygeine,2019
-101005,Andrew,Williams,Religious Studies,2022
-101006,Eric,Hurst,Welding Fabrication,2024
-101007,Liu,Sun,Marketing Management,2023
-101008,Romano,Prieto,Geoscience,2023
-101009,Allison,Miyanohara,Economics,2024
-101010,Jorge,Evangelista,Chemistry,2022
-101011,Kenisha,Davis,Fashion Institute,2023
-101012,Emile,Bak,Nursing,2020
-101013,Peter,Bobrov,Economics,2018
+101001,Sylvia,Ashbaugh,BIOTECHNOLOGY,2021
+101002,Louella,Gilroy,INTERIOR_DESIGN,2022
+101003,Khaldun,Nassar,PHYSICAL_THERAPIST_ASSISTANT,2020
+101004,Katherine,Blum,DENTAL_HYGIENE,2019
+101005,Andrew,Williams,RELIGIOUS_STUDIES,2022
+101006,Eric,Hurst,WELDING_FABRICATION,2024
+101007,Liu,Sun,MARKETING_MANAGEMENT,2023
+101008,Romano,Prieto,GEOSCIENCE,2023
+101009,Allison,Miyanohara,ECONOMICS,2024
+101010,Jorge,Evangelista,CHEMISTRY,2022
+101011,Kenisha,Davis,FASHION_INSTITUTE,2023
+101012,Emile,Bak,NURSING,2020
+101013,Peter,Bobrov,ECONOMICS,2018
