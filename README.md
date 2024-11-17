@@ -20,6 +20,7 @@ The application models student records with the following data structure:
 
 ## File Structure
 
+```
 ├── data/                              # Resource folder for external data files
 │   └── StudentData.csv                # CSV file for storing student records
 │
@@ -48,3 +49,4 @@ The application models student records with the following data structure:
 │   	├── util/
 │       	├── StudentManagerTest.java  # Tests for StudentManager
 │       	├── CsvHandlerTest.java      # Tests for CsvHandler
+```
