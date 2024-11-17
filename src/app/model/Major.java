@@ -1,102 +1,121 @@
 package app.model;
 
+/**
+ * Represents various academic majors, each with a unique code and a
+ * display-friendly name.
+ * 
+ * @author Aidan Reed
+ * @author Elli Steck
+ */
 public enum Major {
-    // A
-    ACCOUNTING("Accounting"),
-    ANTHROPOLOGY("Anthropology"),
-    ARCHITECTURAL_TECHNOLOGY("Architectural Technology"),
-    AUTOMOTIVE_TECHNICIAN("Automotive Technician"),
-    AVIATION_TECHNOLOGY("Aviation Technology"),
+
+	// A
+    ACCN("Accounting"),
+    ANTH("Anthropology"),
+    ARCT("Architectural Technology"),
+    AUTO("Automotive Technician"),
+    AVIA("Aviation Technology"),
     
     // B
-    BIOLOGY("Biology"),
-    BIOTECHNOLOGY("Biotechnology"),
-    BUSINESS_MANAGEMENT("Business Management"),
+    BIOL("Biology"),
+    BIOT("Biotechnology"),
+    BUSM("Business Management"),
     
     // C
-    CERTIFIED_NURSING_ASSISTANT("Certified Nursing Assistant"),
-    CHEMISTRY("Chemistry"),
-    COMMUNICATION("Communication"),
-    COMPUTER_SCIENCES_AND_INFORMATION_SYSTEMS("Computer Sciences and Information Systems"),
-    CRIMINAL_JUSTICE("Criminal Justice"),
-    CULINARY_ARTS("Culinary Arts"),
+    CNAS("Certified Nursing Assistant"),
+    CHEM("Chemistry"),
+    COMM("Communication"),
+    CSIS("Computer Science and Information Systems"),
+    CRIM("Criminal Justice"),
+    CULA("Culinary Arts"),
     
     // D
-    DENTAL_HYGIENE("Dental Hygiene"),
+    DENT("Dental Hygiene"),
     
     // E
-    ECONOMICS("Economics"),
-    EDUCATION("Education"),
-    ENGINEERING("Engineering"),
-    ENGLISH("English"),
-    ENVIRONMENTAL_GEOLOGY("Environmental Geology"),
+    ECON("Economics"),
+    EDUC("Education"),
+    ENGR("Engineering"),
+    ENGL("English"),
+    ENVR("Environmental Geology"),
     
     // F
-    FAMILY_AND_HUMAN_STUDIES("Family and Human Studies"),
-    FASHION_INSTITUTE("Fashion Institute"),
-    FILM_PRODUCTION_TECHNICIAN("Film Production Technician"),
+    FAMH("Family and Human Studies"),
+    FASH("Fashion Institute"),
+    FILM("Film Production Technician"),
     
     // G
-    GEOGRAPHY("Geography"),
-    GEOSCIENCE("Geoscience"),
+    GEOG("Geography"),
+    GEOS("Geoscience"),
     
     // H
-    HEALTH_SCIENCES("Health Sciences"),
-    HISTORY("History"),
-    HOSPITALITY_MANAGEMENT("Hospitality Management"),
-    HUMANITIES("Humanities"),
+    HLTH("Health Sciences"),
+    HIST("History"),
+    HOSP("Hospitality Management"),
+    HUMN("Humanities"),
     
     // I
-    INTERIOR_DESIGN("Interior Design"),
-    INTERNATIONAL_STUDIES("International Studies"),
+    INDS("Interior Design"),
+    INTS("International Studies"),
     
     // L
-    LANGUAGES("Languages"),
-    LEGAL_STUDIES("Legal Studies"),
+    LANG("Languages"),
+    LEGL("Legal Studies"),
     
     // M
-    MANUFACTURING_ENGINEERING("Manufacturing Engineering"),
-    MARKETING_MANAGEMENT("Marketing Management"),
-    MATHEMATICS("Mathematics"),
-    MORTUARY_SCIENCE("Mortuary Science"),
-    MUSIC("Music"),
+    MFGN("Manufacturing Engineering"),
+    MARK("Marketing Management"),
+    MATH("Mathematics"),
+    MORT("Mortuary Science"),
+    MUSC("Music"),
     
     // N
-    NURSING("Nursing"),
+    NURS("Nursing"),
     
     // O
-    OCCUPATIONAL_THERAPY_ASSISTANT("Occupational Therapy Assistant"),
+    OTAS("Occupational Therapy Assistant"),
     
     // P
-    PERFORMING_ARTS("Performing Arts"),
-    PHILOSOPHY("Philosophy"),
-    PHYSICAL_THERAPIST_ASSISTANT("Physical Therapist Assistant"),
-    PHYSICS("Physics"),
-    POLITICAL_SCIENCE("Political Science"),
-    PSYCHOLOGY("Psychology"),
+    PERF("Performing Arts"),
+    PHIL("Philosophy"),
+    PTAS("Physical Therapist Assistant"),
+    PHYS("Physics"),
+    POLS("Political Science"),
+    PSYC("Psychology"),
     
     // R
-    RADIOLOGIC_TECHNOLOGY("Radiologic Technology"),
-    RELIGIOUS_STUDIES("Religious Studies"),
+    RADT("Radiologic Technology"),
+    RELS("Religious Studies"),
     
     // S
-    SOCIAL_WORK("Social Work"),
-    SOCIOLOGY("Sociology"),
+    SOCW("Social Work"),
+    SOCI("Sociology"),
     
     // V
-    VISUAL_ART_AND_DESIGN("Visual Art & Design"),
+    VART("Visual Art & Design"),
     
     // W
-    WELDING_FABRICATION("Welding Fabrication");
+    WELD("Welding Fabrication");
 
     private final String displayName;
 
+    /**
+     * Constructs a new {@code Major} enum constant with a display-friendly name.
+     *
+     * @param displayName the name of the major to be used for display purposes
+     */
     Major(String displayName) {
         this.displayName = displayName;
     }
 
+    /**
+     * Returns the display-friendly name of the major.
+     *
+     * @return the display name of the major
+     */
     @Override
     public String toString() {
         return displayName;
     }
+
 }
