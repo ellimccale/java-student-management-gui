@@ -21,32 +21,32 @@ The application models student records with the following data structure:
 ## File Structure
 
 ```
-├── data/                              # Resource folder for external data files
-│   └── StudentData.csv                # CSV file for storing student records
+├── data/
+│   └── StudentData.csv
 │
-├── src/                               # Main source folder
-│   └── app/                           # Base package for the project
-│   	├── Main.java                    # Entry point for the application
+├── src/
+│   └── app/
+│   	├── Main.java
 │   	│
-│   	├── model/                       # Package for data-related classes
-│   	│   ├── Student.java             # Represents individual students
-│   	│   ├── Major.java               # Enum for student majors
-│   	│
-│   	├── ui/                          # Package for GUI-related classes
-│   	│   ├── MainPanel.java           # Main layout for the app
-│   	│   ├── StudentPanel.java        # Represents a single student row
-│   	│
-│   	├── util/                        # Package for utility classes
-│   	│   ├── StudentManager.java      # Handles student collection and persistence
-│   	│   ├── CsvHandler.java          # Utils for reading/writing CSV files
-│
-├── test/                              # Unit test source folder
-│   └── app/                           # Base package for tests
 │   	├── model/
-│   	│   ├── StudentTest.java         # Tests for the Student class
-│   	│   ├── MajorTest.java           # Tests for the Major enum
+│   	│   ├── Student.java
+│   	│   ├── Major.java
+│   	│
+│   	├── ui/
+│   	│   ├── MainPanel.java
+│   	│   ├── StudentPanel.java
 │   	│
 │   	├── util/
-│       	├── StudentManagerTest.java  # Tests for StudentManager
-│       	├── CsvHandlerTest.java      # Tests for CsvHandler
+│   	│   ├── StudentManager.java
+│   	│   ├── CsvHandler.java
+│
+├── test/
+│   └── app/
+│   	├── model/
+│   	│   ├── StudentTest.java
+│   	│   ├── MajorTest.java
+│   	│
+│   	├── util/
+│       	├── StudentManagerTest.java
+│       	├── CsvHandlerTest.java
 ```
