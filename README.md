@@ -1,8 +1,8 @@
-# Student Database System
+# Student Management System
 
 **CSIS-1410: Object-Oriented Programming, Team Project**
 
-The Student Database System is a Java-based desktop application designed to manage student records through a graphical user interface. It allows users to add, edit, and delete student information stored in a tabular format, using JPanel components to display and organize data.
+The Student Management System is a Java-based desktop application designed to manage student records through a graphical user interface. It allows users to add, edit, and delete student information stored in a tabular format, using JPanel components to display and organize data.
 
 The structure includes three primary classes:
 - Student, representing individual student entries with properties like UUID, student ID, first and last names, major, and academic year
