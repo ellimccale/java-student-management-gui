@@ -133,12 +133,12 @@ public class Student {
 	}
 
 	/**
-     * Returns a string representation of the student in the format 
-     * {lastName}, {firstName}
-     *
-     * @return a string containing the student's last name, followed by a comma 
-     *         and a space, and then the student's first name
-     */
+	 * Returns a string representation of the student in the format
+	 * {lastName}, {firstName}
+	 *
+	 * @return a string containing the student's last name, followed by a comma and
+	 *         a space, and then the student's first name
+	 */
 	@Override
 	public String toString() {
 		return lastName + ", " + firstName;
