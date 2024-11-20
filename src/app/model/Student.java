@@ -52,12 +52,12 @@ public class Student {
 	}
 
 	/**
-	 * Gets the student's unique ID prefixed by "S".
+	 * Gets the student's unique ID.
 	 *
 	 * @return the student's ID
 	 */
-	public String getStudentId() {
-		return "S" + studentId;
+	public int getStudentId() {
+		return studentId;
 	}
 
 	/**
