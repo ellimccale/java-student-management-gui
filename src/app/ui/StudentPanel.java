@@ -25,7 +25,7 @@ public class StudentPanel extends JPanel {
 		JLabel lblStudentLastFirst = new JLabel(this.student.toString());
 		this.add(lblStudentLastFirst);
 
-		JLabel lblStudentMajor = new JLabel(" " + this.student.getMajor());
+		JLabel lblStudentMajor = new JLabel(this.student.getMajor().toString());
 		this.add(lblStudentMajor);
 
 		JLabel lblStudentYear = new JLabel(Integer.toString(this.student.getYear()));
