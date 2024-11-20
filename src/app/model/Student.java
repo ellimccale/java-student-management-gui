@@ -52,12 +52,12 @@ public class Student {
 	}
 
 	/**
-	 * Gets the student's unique ID.
+	 * Gets the student's unique ID prefixed by "S".
 	 *
 	 * @return the student's ID
 	 */
-	public int getStudentId() {
-		return studentId;
+	public String getStudentId() {
+		return "S" + studentId;
 	}
 
 	/**
@@ -130,6 +130,18 @@ public class Student {
 	 */
 	public void setYear(int year) {
 		this.year = year;
+	}
+
+	/**
+     * Returns a string representation of the student in the format 
+     * {lastName}, {firstName}
+     *
+     * @return a string containing the student's last name, followed by a comma 
+     *         and a space, and then the student's first name
+     */
+	@Override
+	public String toString() {
+		return lastName + ", " + firstName;
 	}
 
 }
