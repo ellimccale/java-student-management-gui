@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import app.model.Student;
+import javax.swing.SwingConstants;
 
 public class StudentPanel extends JPanel {
 
@@ -17,17 +18,19 @@ public class StudentPanel extends JPanel {
 
 		this.setLayout(new GridLayout(1, 0, 0, 0));
 
+		JLabel lblStudentId = new JLabel("S" + this.student.getStudentId());
+		lblStudentId.setHorizontalAlignment(SwingConstants.RIGHT);
+		this.add(lblStudentId);
+
 		JLabel lblStudentLastFirst = new JLabel(this.student.toString());
 		this.add(lblStudentLastFirst);
 
-		JLabel lblStudentId = new JLabel(this.student.getStudentId());
-		this.add(lblStudentId);
-
-		JLabel lblStudentYear = new JLabel(Integer.toString(this.student.getYear()));
-		this.add(lblStudentYear);
-
 		JLabel lblStudentMajor = new JLabel(this.student.getMajor().toString());
 		this.add(lblStudentMajor);
+
+		JLabel lblStudentYear = new JLabel(Integer.toString(this.student.getYear()));
+		lblStudentYear.setHorizontalAlignment(SwingConstants.RIGHT);
+		this.add(lblStudentYear);
 	}
 
 }

@@ -10,6 +10,7 @@ package app.model;
 public enum Major {
 
 	// A
+
 	ACCN("Accounting"),
 	ANTH("Anthropology"),
 	ARCT("Architectural Technology"),
@@ -17,11 +18,13 @@ public enum Major {
 	AVIA("Aviation Technology"),
 
 	// B
+
 	BIOL("Biology"),
 	BIOT("Biotechnology"),
 	BUSM("Business Management"),
 
 	// C
+
 	CNAS("Certified Nursing Assistant"),
 	CHEM("Chemistry"),
 	COMM("Communication"),
@@ -30,9 +33,11 @@ public enum Major {
 	CULA("Culinary Arts"),
 
 	// D
+
 	DENT("Dental Hygiene"),
 
 	// E
+
 	ECON("Economics"),
 	EDUC("Education"),
 	ENGR("Engineering"),
@@ -40,29 +45,35 @@ public enum Major {
 	ENVR("Environmental Geology"),
 
 	// F
+
 	FAMH("Family and Human Studies"),
 	FASH("Fashion Institute"),
 	FILM("Film Production Technician"),
 
 	// G
+
 	GEOG("Geography"),
 	GEOS("Geoscience"),
 
 	// H
+
 	HLTH("Health Sciences"),
 	HIST("History"),
 	HOSP("Hospitality Management"),
 	HUMN("Humanities"),
 
 	// I
+
 	INDS("Interior Design"),
 	INTS("International Studies"),
 
 	// L
+
 	LANG("Languages"),
 	LEGL("Legal Studies"),
 
 	// M
+
 	MFGN("Manufacturing Engineering"),
 	MARK("Marketing Management"),
 	MATH("Mathematics"),
@@ -70,12 +81,15 @@ public enum Major {
 	MUSC("Music"),
 
 	// N
+
 	NURS("Nursing"),
 
 	// O
+
 	OTAS("Occupational Therapy Assistant"),
 
 	// P
+
 	PERF("Performing Arts"),
 	PHIL("Philosophy"),
 	PTAS("Physical Therapist Assistant"),
@@ -84,17 +98,21 @@ public enum Major {
 	PSYC("Psychology"),
 
 	// R
+
 	RADT("Radiologic Technology"),
 	RELS("Religious Studies"),
 
 	// S
+
 	SOCW("Social Work"),
 	SOCI("Sociology"),
 
 	// V
+
 	VART("Visual Art & Design"),
 
 	// W
+
 	WELD("Welding Fabrication");
 
 	private final String displayName;
