@@ -11,6 +11,28 @@ import javax.swing.border.EmptyBorder;
 
 import app.ui.MainPanel;
 
+/**
+ * The main application frame for the student management system.
+ * 
+ * <p>
+ * This class extends {@link JFrame} and serves as the entry point for the
+ * graphical user interface. It initializes the main content pane, which
+ * includes a title at the top and a scrollable panel displaying student
+ * information in the center.
+ * </p>
+ * 
+ * <p>
+ * The layout is organized using {@link BorderLayout}:
+ * </p>
+ * 
+ * <ul>
+ * <li><b>NORTH:</b> Displays the title of the application.</li>
+ * <li><b>CENTER:</b> Displays the main content area, which includes a
+ * {@link MainPanel} for student information.</li>
+ * </ul>
+ * 
+ * @see app.ui.MainPanel
+ */
 public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +51,16 @@ public class Main extends JFrame {
 		});
 	}
 
+	/**
+	 * Constructs the main application frame.
+	 * 
+	 * <p>
+	 * The frame is initialized with a scrollable {@link MainPanel} in the center to
+	 * display student information.
+	 * </p>
+	 */
 	public Main() {
+		setTitle("Student Management System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 
@@ -39,13 +70,11 @@ public class Main extends JFrame {
 
 		setContentPane(contentPane);
 
-		// NORTH
-
+		// NORTH: Application title
 		JLabel lblTitle = new JLabel("University Name");
 		contentPane.add(lblTitle, BorderLayout.NORTH);
 
-		// CENTER
-
+		// CENTER: Main panel with student information
 		JScrollPane scrollPane = new MainPanel();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 	}
