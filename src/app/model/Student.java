@@ -1,5 +1,7 @@
 package app.model;
 
+import java.util.Objects;
+
 /**
  * Represents a student with a unique ID, name, major, and starting year.
  * 
@@ -8,7 +10,7 @@ package app.model;
  */
 public class Student {
 
-	private static int uuid = 101014;
+	private static int uuid;
 	private int studentId;
 	private String firstName;
 	private String lastName;
@@ -16,8 +18,13 @@ public class Student {
 	private int year;
 
 	/**
-	 * Constructs a new Student with the given details. Automatically generates a
-	 * unique student ID.
+	 * Public constructor for creating a new {@code Student} with the given details.
+	 * Automatically generates a unique student ID using the internal {@code uuid}.
+	 * <p>
+	 * This constructor is intended for dynamically creating new students during
+	 * runtime, ensuring that each student receives a unique identifier. For
+	 * creating students from existing stored data, use the package-private
+	 * constructor.
 	 *
 	 * @param firstName the student's first name
 	 * @param lastName  the student's last name
@@ -25,7 +32,8 @@ public class Student {
 	 * @param year      the year the student started
 	 */
 	public Student(String firstName, String lastName, Major major, int year) {
-		generateId();
+		this.studentId = uuid;
+		uuid++;
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -34,16 +42,33 @@ public class Student {
 	}
 
 	/**
-	 * Generates a unique student ID for the student.
+	 * Package-private constructor for creating a {@code Student} object using
+	 * existing stored data, such as from a CSV file. This constructor does not
+	 * generate a new student ID and directly assigns the provided
+	 * {@code studentId}.
+	 * <p>
+	 * Intended for use by classes within the same package, such as utility classes
+	 * handling data loading. For dynamically creating new students, use the public
+	 * constructor that generates a unique student ID.
+	 * 
+	 * @param studentId the student's unique identifier
+	 * @param firstName the student's first name
+	 * @param lastName  the student's last name
+	 * @param major     the student's major
+	 * @param year      the year the student started
+	 * @see StudentManager
 	 */
-	private final void generateId() {
-		this.studentId = uuid;
-		uuid++;
+	Student(int studentId, String firstName, String lastName, Major major, int year) {
+		this.studentId = studentId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.major = major;
+		this.year = year;
 	}
 
 	/**
-	 * Resets the static UUID for testing purposes. Package-private to restrict
-	 * access to tests within the same package.
+	 * Resets the static UUID. Package-private to restrict access to methods within
+	 * the same package.
 	 *
 	 * @param value the value to reset the UUID to
 	 */
@@ -133,11 +158,48 @@ public class Student {
 	}
 
 	/**
+	 * Computes the hash code for this {@code Student} object.
+	 * <p>
+	 * The hash code is based solely on the {@code studentId}, ensuring that two
+	 * {@code Student} objects with the same {@code studentId} will have the same
+	 * hash code.
+	 * 
+	 * @return the hash code for this {@code Student} object
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(studentId);
+	}
+
+	/**
+	 * Compares this {@code Student} to the specified object for equality.
+	 * <p>
+	 * Two {@code Student} objects are considered equal if and only if their
+	 * {@code studentId} values are the same. This ensures that student identity is
+	 * determined solely by their unique ID, regardless of other fields like name or
+	 * major.
+	 * 
+	 * @param obj the object to compare this {@code Student} against
+	 * @return {@code true} if the specified object is a {@code Student} with the
+	 *         same {@code studentId}, {@code false} otherwise
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+
+		if (!(obj instanceof Student))
+			return false;
+
+		Student other = (Student) obj;
+		return studentId == other.studentId;
+	}
+
+	/**
 	 * Returns a string representation of the student in the format
 	 * {lastName}, {firstName}
 	 *
-	 * @return a string containing the student's last name, followed by a comma and
-	 *         a space, and then the student's first name
+	 * @return a string containing the student's full name
 	 */
 	@Override
 	public String toString() {
