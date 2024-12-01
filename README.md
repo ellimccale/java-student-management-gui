@@ -16,8 +16,6 @@ The application models student records with the following data structure:
   - `major`: The student's major, represented by the `Major` enum.
   - `year`: The year the student started, as an integer.
 
-- **`Major` enum**: A fixed list of possible student majors. Each major has a display-friendly name for UI purposes.
-
 ## File Structure
 
 ```
@@ -29,24 +27,18 @@ The application models student records with the following data structure:
 │   	├── Main.java
 │   	│
 │   	├── model/
-│   	│   ├── Student.java
 │   	│   ├── Major.java
+│   	│   ├── Student.java
+│   	│   ├── StudentManager.java
 │   	│
 │   	├── ui/
 │   	│   ├── MainPanel.java
 │   	│   ├── StudentPanel.java
-│   	│
-│   	├── util/
-│   	│   ├── StudentManager.java
-│   	│   ├── CsvHandler.java
 │
 ├── test/
 │   └── app/
 │   	├── model/
-│   	│   ├── StudentTest.java
 │   	│   ├── MajorTest.java
-│   	│
-│   	├── util/
-│       	├── StudentManagerTest.java
-│       	├── CsvHandlerTest.java
+│     │   ├── StudentManagerTest.java
+│   	│   ├── StudentTest.java
 ```
