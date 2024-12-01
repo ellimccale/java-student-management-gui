@@ -13,12 +13,9 @@ import app.model.Student;
  * <p>
  * The panel displays the student's ID, name (last name, first name), major, and
  * the year they started, organized in a single row layout.
- * </p>
- * 
  * <p>
  * This panel uses a {@link GridLayout} to arrange its components and is
  * intended to be added to a parent container such as a {@code JScrollPane}.
- * </p>
  * 
  * @author Aidan Reed
  * @author Elli Steck

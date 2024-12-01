@@ -1,10 +1,10 @@
-package app.util;
+package app.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class CsvHandlerTest {
+class StudentManagerTest {
 
 	@Test
 	void test() {

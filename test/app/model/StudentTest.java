@@ -17,7 +17,7 @@ class StudentTest {
 	}
 
 	@Test
-	void student_constructor_should_initialize_all_fields() {
+	void public_student_constructor_should_initialize_all_fields() {
 		assertNotNull(student, "Student object should not be null");
 		assertEquals(101014, student.getStudentId(), "Student ID should be 101014");
 		assertEquals("John", student.getFirstName(), "First name should be 'John'");
@@ -27,8 +27,23 @@ class StudentTest {
 	}
 
 	@Test
+	void package_private_student_constructor_should_initialize_all_fields_without_changing_uuid() {
+		Student loadedStudent = new Student(101020, "Jane", "Smith", Major.BIOL, 2024);
+
+		assertNotNull(loadedStudent, "Student object should not be null");
+		assertEquals(101020, loadedStudent.getStudentId(), "Student ID should be 101020");
+		assertEquals("Jane", loadedStudent.getFirstName(), "First name should be 'Jane'");
+		assertEquals("Smith", loadedStudent.getLastName(), "Last name should be 'Smith'");
+		assertEquals(Major.BIOL, loadedStudent.getMajor(), "Major should be 'BIOL'");
+		assertEquals(2024, loadedStudent.getYear(), "Year should be 2024");
+
+		assertEquals(101014, student.getStudentId(), "UUID should not be altered by package-private constructor");
+	}
+
+	@Test
 	void student_id_values_should_be_unique() {
 		Student otherStudent = new Student("Jane", "Smith", Major.BIOL, 2024);
+
 		assertEquals(101015, otherStudent.getStudentId(), "Other student ID should be 101015");
 		assertNotEquals(student.getStudentId(), otherStudent.getStudentId());
 	}
@@ -36,6 +51,7 @@ class StudentTest {
 	@Test
 	void student_id_values_should_increment_by_one() {
 		Student otherStudent = new Student("Alice", "Johnson", Major.ENGR, 2023);
+
 		assertTrue(otherStudent.getStudentId() > student.getStudentId(),
 				"Subsequent student ID should be greater than the first");
 	}
