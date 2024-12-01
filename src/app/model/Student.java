@@ -18,7 +18,7 @@ public class Student {
 	private int year;
 
 	/**
-	 * Public constructor for creating a new {@code Student} with the given details.
+	 * Public constructor for creating a new {@link Student} with the given details.
 	 * Automatically generates a unique student ID using the internal {@code uuid}.
 	 * <p>
 	 * This constructor is intended for dynamically creating new students during
@@ -43,9 +43,8 @@ public class Student {
 
 	/**
 	 * Package-private constructor for creating a {@code Student} object using
-	 * existing stored data, such as from a CSV file. This constructor does not
-	 * generate a new student ID and directly assigns the provided
-	 * {@code studentId}.
+	 * existing stored data from the CSV file. This constructor does not generate a
+	 * new student ID and directly assigns the provided {@code studentId}.
 	 * <p>
 	 * Intended for use by classes within the same package, such as utility classes
 	 * handling data loading. For dynamically creating new students, use the public
@@ -70,7 +69,7 @@ public class Student {
 	 * Resets the static UUID. Package-private to restrict access to methods within
 	 * the same package.
 	 *
-	 * @param value the value to reset the UUID to
+	 * @param value the value to replace the UUID
 	 */
 	static void resetUuid(int value) {
 		uuid = value;
@@ -197,7 +196,7 @@ public class Student {
 
 	/**
 	 * Returns a string representation of the student in the format
-	 * {lastName}, {firstName}
+	 * {@code lastName}, {@code firstName}
 	 *
 	 * @return a string containing the student's full name
 	 */

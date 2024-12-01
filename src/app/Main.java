@@ -124,6 +124,7 @@ public class Main extends JFrame {
         return panelAddStudent;
     }
 
+	// Test
 	private JPanel createOtherPanel() {
 		JPanel panelOther = new JPanel();
 

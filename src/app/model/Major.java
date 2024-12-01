@@ -118,7 +118,7 @@ public enum Major {
 	private final String displayName;
 
 	/**
-	 * Constructs a new {@code Major} enum constant with a display-friendly name.
+	 * Constructs a new {@link Major} enum constant with a display-friendly name.
 	 *
 	 * @param displayName the name of the major to be used for display purposes
 	 */
