@@ -9,6 +9,11 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * @author Aidan Reed
+ * @author Elli Steck
+ * @see app.model.Student
+ */
 public class StudentManager {
 
 	private static final String STUDENT_DATA_FILE = "data/StudentData.csv";
@@ -35,8 +40,7 @@ public class StudentManager {
 	 * Loads student data from the CSV file into memory.
 	 * <p>
 	 * This method initializes the internal {@code students} set and populates it
-	 * with {@link Student} objects created from the data in the CSV file. The first
-	 * row of the CSV file (column headers) is skipped.
+	 * with {@link Student} objects created from the data in the CSV file.
 	 * <p>
 	 * The {@code uuid} for generating new student IDs is set to the highest
 	 * existing student ID in the file plus one. If the file is empty or no valid
@@ -48,8 +52,6 @@ public class StudentManager {
 		int maxId = 0;
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_DATA_FILE))) {
-			reader.readLine(); // Skip the column header row
-
 			students = new LinkedHashSet<>();
 			String row;
 
@@ -60,7 +62,7 @@ public class StudentManager {
 				maxId = Math.max(maxId, studentId);
 
 				students.add(new Student(
-						studentId,                   // ID from the data file
+						studentId,                   // Existing ID
 						columns[1],                  // First name
 						columns[2],                  // Last name
 						Major.valueOf(columns[3]),   // Major
