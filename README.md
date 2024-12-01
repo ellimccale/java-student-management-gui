@@ -39,6 +39,6 @@ The application models student records with the following data structure:
 │   └── app/
 │   	├── model/
 │   	│   ├── MajorTest.java
-│     │   ├── StudentManagerTest.java
+│   	│   ├── StudentManagerTest.java
 │   	│   ├── StudentTest.java
 ```
