@@ -1,8 +1,7 @@
 package app.ui;
 
 import java.awt.GridLayout;
-import java.util.Collections;
-import java.util.LinkedHashSet;
+import java.io.IOException;
 import java.util.Set;
 
 import javax.swing.JLabel;
@@ -11,22 +10,17 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-import app.model.Major;
 import app.model.Student;
+import app.model.StudentManager;
 
 /**
  * Represents the main panel of the student management application.
- * 
  * <p>
  * This panel is a {@link JScrollPane} that displays a header row and a
  * scrollable list of student panels, where each student panel represents a
  * single student's information.
- * </p>
- * 
  * <p>
  * The panel includes:
- * </p>
- * 
  * <ul>
  * <li>A column header view displaying the labels for "Student ID", "Last,
  * First", "Major", and "Academic Year".</li>
@@ -41,15 +35,13 @@ import app.model.Student;
  */
 public class MainPanel extends JScrollPane {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8079487866761426457L;
 
 	/**
 	 * Constructs a new {@code MainPanel}, initializing the header and the viewport
 	 * with student information.
-	 * 
 	 * <p>
 	 * The scroll pane disables horizontal scrolling to maintain a clean layout.
-	 * </p>
 	 */
 	public MainPanel() {
 		this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -92,39 +84,35 @@ public class MainPanel extends JScrollPane {
 	/**
 	 * Creates the scrollable list of student rows, with each row represented by a
 	 * {@link StudentPanel}.
-	 * 
 	 * <p>
-	 * The students are added in insertion order and displayed vertically.
-	 * </p>
+	 * If an error occurs while loading the students, the panel will display an
+	 * error message instead of student rows.
 	 * 
 	 * @return a {@link JPanel} containing a vertical list of {@link StudentPanel}
-	 *         objects
+	 *         objects or an error message
 	 */
 	private JPanel createMainPanelRows() {
 		JPanel mainPanelRows = new JPanel();
 		mainPanelRows.setLayout(new GridLayout(0, 1, 0, 0));
 
-		// Hardcoded for test
-		Set<Student> students = new LinkedHashSet<>();
-		Collections.addAll(
-				students,
-				new Student("Sylvia", "Ashbaugh", Major.BIOT, 2021),
-				new Student("Louella", "Gilroy", Major.INDS, 2022),
-				new Student("Khaldun", "Nassar", Major.PTAS, 2020),
-				new Student("Katherine", "Blum", Major.DENT, 2019),
-				new Student("Andrew", "Williams", Major.RELS, 2022),
-				new Student("Eric", "Hurst", Major.WELD, 2024),
-				new Student("Liu", "Sun", Major.MARK, 2023),
-				new Student("Romano", "Prieto", Major.GEOS, 2023),
-				new Student("Allison", "Miyanohara", Major.ECON, 2024),
-				new Student("Jorge", "Evangelista", Major.CHEM, 2022),
-				new Student("Kenisha", "Davis", Major.FASH, 2023),
-				new Student("Emile", "Bak", Major.NURS, 2020),
-				new Student("Peter", "Bobrov", Major.ECON, 2018));
+		try {
+			Set<Student> students = StudentManager.getStudents();
 
-		for (Student st : students) {
-			JPanel studentPanel = new StudentPanel(st);
-			mainPanelRows.add(studentPanel);
+			if (students.isEmpty()) {
+				JLabel noStudentsLabel = new JLabel("No students found.");
+				noStudentsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				mainPanelRows.add(noStudentsLabel);
+			} else {
+				for (Student st : students) {
+					JPanel studentPanel = new StudentPanel(st);
+					mainPanelRows.add(studentPanel);
+				}
+			}
+		} catch (IOException e) {
+			JLabel errorLabel = new JLabel("Error loading students: " + e.getMessage());
+			errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			mainPanelRows.add(errorLabel);
+			e.printStackTrace();
 		}
 
 		return mainPanelRows;
