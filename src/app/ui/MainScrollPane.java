@@ -1,6 +1,12 @@
 package app.ui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.io.IOException;
 import java.util.Set;
 
@@ -20,7 +26,6 @@ import app.model.StudentManager;
  * scrollable list of student panels, where each student panel represents a
  * single student's information.
  * 
- * @author Aidan Reed
  * @author Elli Steck
  * @see app.model.StudentManager
  * @see app.ui.StudentPanel
@@ -36,13 +41,13 @@ public class MainScrollPane extends JScrollPane {
 	 * Horizontal scrolling is disabled to maintain a clean layout.
 	 */
 	public MainScrollPane() {
-		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		JPanel panelScrollHeader = createPanelScrollHeader();
-		setColumnHeaderView(panelScrollHeader);
+		this.setColumnHeaderView(panelScrollHeader);
 
 		JPanel panelScrollViewport = createPanelScrollViewport();
-		setViewportView(panelScrollViewport);
+		this.setViewportView(panelScrollViewport);
 	}
 
 	/**
@@ -52,21 +57,40 @@ public class MainScrollPane extends JScrollPane {
 	 */
 	private JPanel createPanelScrollHeader() {
 		JPanel panelScrollHeader = new JPanel();
-		panelScrollHeader.setLayout(new GridLayout(1, 0, 0, 0));
+		panelScrollHeader.setLayout(new GridBagLayout());
+		panelScrollHeader.setBackground(new Color(200, 200, 200));
+
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.gridy = 0;
+
+		JLabel lblLastFirstName = new JLabel("Name");
+		lblLastFirstName.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
+		lblLastFirstName.setPreferredSize(new Dimension(200, 20));
+		gbc.gridx = 0;
+		gbc.weightx = 0.5;
+		panelScrollHeader.add(lblLastFirstName, gbc);
 
 		JLabel lblStudentId = new JLabel("Student ID");
-		lblStudentId.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelScrollHeader.add(lblStudentId);
-
-		JLabel lblLastFirstName = new JLabel("Last, First");
-		panelScrollHeader.add(lblLastFirstName);
-
-		JLabel lblMajor = new JLabel("Major");
-		panelScrollHeader.add(lblMajor);
+		lblStudentId.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
+		lblStudentId.setPreferredSize(new Dimension(125, 20));
+		gbc.gridx = 1;
+		gbc.weightx = 0.0;
+		panelScrollHeader.add(lblStudentId, gbc);
 
 		JLabel lblAcademicYear = new JLabel("Academic year");
-		lblAcademicYear.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelScrollHeader.add(lblAcademicYear);
+		lblAcademicYear.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
+		lblAcademicYear.setPreferredSize(new Dimension(125, 20));
+		gbc.gridx = 2;
+		panelScrollHeader.add(lblAcademicYear, gbc);
+
+		JLabel lblMajor = new JLabel("Major");
+		lblMajor.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
+		lblMajor.setPreferredSize(new Dimension(200, 20));
+		gbc.gridx = 3;
+		gbc.weightx = 0.5;
+		panelScrollHeader.add(lblMajor, gbc);
 
 		return panelScrollHeader;
 	}
@@ -83,19 +107,24 @@ public class MainScrollPane extends JScrollPane {
 	 */
 	private JPanel createPanelScrollViewport() {
 		JPanel panelScrollViewport = new JPanel();
-		panelScrollViewport.setLayout(new GridLayout(0, 1, 0, 0));
+		panelScrollViewport.setLayout(new GridLayout(0, 1));
 
 		try {
 			Set<Student> students = StudentManager.getStudents();
 
 			if (students.isEmpty()) {
-				JLabel lblNoStudents = new JLabel("No students found.");
+				JLabel lblNoStudents = new JLabel("No students were found.");
 				lblNoStudents.setHorizontalAlignment(SwingConstants.CENTER);
 				panelScrollViewport.add(lblNoStudents);
 			} else {
-				for (Student st : students) {
-					JPanel panelThisStudent = new StudentPanel(st);
+				int index = 0;
+				for (Student student : students) {
+					JPanel panelThisStudent = new StudentPanel(student);
+					if (index % 2 == 0) {
+						panelThisStudent.setBackground(new Color(220, 220, 220));
+					}
 					panelScrollViewport.add(panelThisStudent);
+					index++;
 				}
 			}
 		} catch (IOException e) {

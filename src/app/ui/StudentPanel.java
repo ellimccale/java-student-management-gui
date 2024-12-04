@@ -1,10 +1,12 @@
 package app.ui;
 
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import app.model.Student;
 
@@ -15,36 +17,49 @@ import app.model.Student;
  * name, first name), major, and the year they started, organized in a single
  * row layout.
  * <p>
- * Uses a {@link GridLayout} to arrange components and is intended to be added
- * to its parent container {@link MainScrollPane}.
+ * Uses a {@link GridBagLayout} to arrange components and is intended to be
+ * added to its parent container {@link MainScrollPane}.
  * 
- * @author Aidan Reed
  * @author Elli Steck
  * @see app.model.Student
  */
 public class StudentPanel extends JPanel {
 
 	private static final long serialVersionUID = 4313955522649481600L;
-	private Student student;
+	private final Student student;
 
 	public StudentPanel(Student student) {
 		this.student = student;
 
-		setLayout(new GridLayout(1, 0, 0, 0));
+		this.setLayout(new GridBagLayout());
 
-		JLabel lblStudentId = new JLabel("S" + this.student.getStudentId());
-		lblStudentId.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblStudentId);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.gridy = 0;
 
 		JLabel lblStudentLastFirst = new JLabel(this.student.toString());
-		add(lblStudentLastFirst);
+		lblStudentLastFirst.setPreferredSize(new Dimension(200, 40));
+		gbc.gridx = 0;
+		gbc.weightx = 0.5;
+		this.add(lblStudentLastFirst, gbc);
 
-		JLabel lblStudentMajor = new JLabel(this.student.getMajor().toString());
-		add(lblStudentMajor);
+		JLabel lblStudentId = new JLabel("S" + this.student.getStudentId());
+		lblStudentId.setPreferredSize(new Dimension(125, 40));
+		gbc.gridx = 1;
+		gbc.weightx = 0.0;
+		this.add(lblStudentId, gbc);
 
 		JLabel lblStudentYear = new JLabel(Integer.toString(this.student.getYear()));
-		lblStudentYear.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblStudentYear);
+		lblStudentYear.setPreferredSize(new Dimension(125, 40));
+		gbc.gridx = 2;
+		this.add(lblStudentYear, gbc);
+
+		JLabel lblStudentMajor = new JLabel(this.student.getMajor().toString());
+		lblStudentMajor.setPreferredSize(new Dimension(200, 40));
+		gbc.gridx = 3;
+		gbc.weightx = 0.5;
+		this.add(lblStudentMajor, gbc);
 	}
 
 }

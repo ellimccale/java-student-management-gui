@@ -10,7 +10,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * @author Aidan Reed
  * @author Elli Steck
  * @see app.model.Student
  */
@@ -34,6 +33,14 @@ public class StudentManager {
 			loadStudentsFromFile();
 
 		return Collections.unmodifiableSet(students);
+	}
+
+	public static void addStudent(Student student) throws IOException {
+		if (students == null)
+			loadStudentsFromFile();
+
+		students.add(student);
+		saveStudentsToFile();
 	}
 
 	/**
@@ -74,10 +81,18 @@ public class StudentManager {
 		Student.resetUuid(maxId == 0 ? 101001 : maxId + 1);
 	}
 
-	@SuppressWarnings("unused")
 	private static void saveStudentsToFile() throws IOException {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(STUDENT_DATA_FILE))) {
-
+			for (Student student : students) {
+				writer.write(String.join(",",
+						String.valueOf(student.getStudentId()),
+						student.getFirstName(),
+						student.getLastName(),
+						student.getMajor().name(),
+						String.valueOf(student.getYear())
+					));
+				writer.newLine();
+			}
 		}
 	}
 

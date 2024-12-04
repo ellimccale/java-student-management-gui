@@ -5,7 +5,6 @@ import java.util.Objects;
 /**
  * Represents a student with a unique ID, name, major, and starting year.
  * 
- * @author Aidan Reed
  * @author Elli Steck
  */
 public class Student {
