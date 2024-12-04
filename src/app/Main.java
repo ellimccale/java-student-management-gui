@@ -15,33 +15,34 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import app.model.Major;
 import app.model.Student;
 import app.model.StudentManager;
-import app.ui.Dialog;
-import app.ui.MainScrollPane;
+import app.view.Dialog;
+import app.view.MainScrollPane;
 
 /**
  * The main application frame for the student management system.
  * <p>
- * This class extends {@link JFrame} and serves as the entry point for the
- * graphical user interface. It initializes the main content pane, which
- * includes a title at the top and a scrollable panel displaying student
- * information in the center.
+ * This class extends {@link JFrame} and serves as the entry point for the GUI.
+ * It initializes the main content pane, which includes a title at the top and a
+ * scrollable panel displaying student information in the center.
  * 
  * @author Elli Steck
- * @see app.ui.Dialog
- * @see app.ui.MainScrollPane
+ * @see app.model.Student
+ * @see app.model.StudentManager
+ * @see app.view.Dialog
+ * @see app.view.MainScrollPane
  */
 public class Main extends JFrame {
 
 	private static final long serialVersionUID = 4276895503191674509L;
 	private JPanel contentPane;
 	private Dialog dialog;
+	private MainScrollPane mainScrollPane;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -87,36 +88,49 @@ public class Main extends JFrame {
 
 		JButton btnAddStudent = new JButton("Add student");
 		btnAddStudent.addActionListener(e -> {
-			dialog.initDialog("Add Student", createPanelAddStudent(), 600, 300);
+			dialog.init("Add Student", createPanelAddStudent(), 600, 300);
 		});
 		panelLayoutNorth.add(btnAddStudent);
 
 		contentPane.add(panelLayoutNorth, BorderLayout.NORTH);
 
 		// CENTER: Main panel with student information
-		JScrollPane mainScrollPane = new MainScrollPane();
+		mainScrollPane = new MainScrollPane();
 		mainScrollPane.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
 		contentPane.add(mainScrollPane, BorderLayout.CENTER);
 
 	}
 
+	/**
+	 * Creates and returns a {@link JPanel} representing the "Add Student" form.
+	 * <p>
+	 * Upon submission, a new {@link Student} is created and added to the system via
+	 * {@link StudentManager#addStudent(Student)}. The student list in
+	 * {@code MainScrollPane} is updated dynamically.
+	 *
+	 * @return a {@link JPanel} containing the "Add Student" form and buttons
+	 */
 	private JPanel createPanelAddStudent() {
 		JPanel panelAddStudent = new JPanel();
 		panelAddStudent.setLayout(new GridLayout(0, 2));
 		panelAddStudent.setBorder(new EmptyBorder(20, 20, 20, 20));
 
+		// Row 1
 		panelAddStudent.add(new JLabel("First name*"));
 		panelAddStudent.add(new JLabel("Last name*"));
 
+		// Row 2
 		JTextField fieldFirstName = new JTextField();
 		panelAddStudent.add(fieldFirstName);
 
 		JTextField fieldLastName = new JTextField();
 		panelAddStudent.add(fieldLastName);
 
+		// Row 3
 		panelAddStudent.add(new JLabel("Academic year*"));
 		panelAddStudent.add(new JLabel("Major*"));
 
+		// Row 4
 		JTextField fieldAcademicYear = new JTextField();
 		panelAddStudent.add(fieldAcademicYear);
 
@@ -124,6 +138,7 @@ public class Main extends JFrame {
 		JComboBox<Major> selectMajor = new JComboBox<>(majorsList);
 		panelAddStudent.add(selectMajor);
 
+		// Row 5
 		panelAddStudent.add(new JLabel("* Required fields"));
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 0, 0));
@@ -142,11 +157,16 @@ public class Main extends JFrame {
 				Major major = (Major) selectMajor.getSelectedItem();
 				int academicYear = Integer.valueOf(fieldAcademicYear.getText());
 
-				StudentManager.addStudent(new Student(
-						firstName, lastName, major, academicYear));
-			} catch (NumberFormatException | IOException e1) {
-				e1.printStackTrace();
+				Student newStudent = new Student(firstName, lastName, major, academicYear);
+
+				StudentManager.addStudent(newStudent);
+				mainScrollPane.addStudentPanel(newStudent);
+				mainScrollPane.getVerticalScrollBar().setValue(
+						mainScrollPane.getVerticalScrollBar().getMaximum());
+			} catch (NumberFormatException | IOException ex) {
+				ex.printStackTrace();
 			}
+
 			((JDialog) btnConfirmAddStudent.getTopLevelAncestor()).dispose();
 		});
 		buttonPanel.add(btnConfirmAddStudent);

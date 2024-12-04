@@ -1,4 +1,4 @@
-package app.ui;
+package app.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,12 +27,15 @@ import app.model.StudentManager;
  * single student's information.
  * 
  * @author Elli Steck
+ * @see app.view.StudentPanel
+ * @see app.model.Student
  * @see app.model.StudentManager
- * @see app.ui.StudentPanel
  */
 public class MainScrollPane extends JScrollPane {
 
 	private static final long serialVersionUID = 8079487866761426457L;
+	private static final int LABEL_HEIGHT = 20;
+	private JPanel panelScrollViewport;
 
 	/**
 	 * Constructs a new {@link MainScrollPane}, initializing the header and viewport
@@ -46,7 +49,8 @@ public class MainScrollPane extends JScrollPane {
 		JPanel panelScrollHeader = createPanelScrollHeader();
 		this.setColumnHeaderView(panelScrollHeader);
 
-		JPanel panelScrollViewport = createPanelScrollViewport();
+		panelScrollViewport = new JPanel(new GridLayout(0, 1));
+		updatePanelScrollViewport();
 		this.setViewportView(panelScrollViewport);
 	}
 
@@ -67,27 +71,27 @@ public class MainScrollPane extends JScrollPane {
 
 		JLabel lblLastFirstName = new JLabel("Name");
 		lblLastFirstName.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
-		lblLastFirstName.setPreferredSize(new Dimension(200, 20));
+		lblLastFirstName.setPreferredSize(new Dimension(200, LABEL_HEIGHT));
 		gbc.gridx = 0;
 		gbc.weightx = 0.5;
 		panelScrollHeader.add(lblLastFirstName, gbc);
 
 		JLabel lblStudentId = new JLabel("Student ID");
 		lblStudentId.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
-		lblStudentId.setPreferredSize(new Dimension(125, 20));
+		lblStudentId.setPreferredSize(new Dimension(125, LABEL_HEIGHT));
 		gbc.gridx = 1;
 		gbc.weightx = 0.0;
 		panelScrollHeader.add(lblStudentId, gbc);
 
 		JLabel lblAcademicYear = new JLabel("Academic year");
 		lblAcademicYear.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
-		lblAcademicYear.setPreferredSize(new Dimension(125, 20));
+		lblAcademicYear.setPreferredSize(new Dimension(125, LABEL_HEIGHT));
 		gbc.gridx = 2;
 		panelScrollHeader.add(lblAcademicYear, gbc);
 
 		JLabel lblMajor = new JLabel("Major");
 		lblMajor.setFont(lblLastFirstName.getFont().deriveFont(Font.BOLD));
-		lblMajor.setPreferredSize(new Dimension(200, 20));
+		lblMajor.setPreferredSize(new Dimension(200, LABEL_HEIGHT));
 		gbc.gridx = 3;
 		gbc.weightx = 0.5;
 		panelScrollHeader.add(lblMajor, gbc);
@@ -105,11 +109,9 @@ public class MainScrollPane extends JScrollPane {
 	 * @return a {@link JPanel} containing a vertical list of {@link StudentPanel}
 	 *         objects or an error message
 	 */
-	private JPanel createPanelScrollViewport() {
-		JPanel panelScrollViewport = new JPanel();
-		panelScrollViewport.setLayout(new GridLayout(0, 1));
-
+	private void updatePanelScrollViewport() {
 		try {
+			panelScrollViewport.removeAll();
 			Set<Student> students = StudentManager.getStudents();
 
 			if (students.isEmpty()) {
@@ -119,11 +121,7 @@ public class MainScrollPane extends JScrollPane {
 			} else {
 				int index = 0;
 				for (Student student : students) {
-					JPanel panelThisStudent = new StudentPanel(student);
-					if (index % 2 == 0) {
-						panelThisStudent.setBackground(new Color(220, 220, 220));
-					}
-					panelScrollViewport.add(panelThisStudent);
+					addStudentPanel(student, index);
 					index++;
 				}
 			}
@@ -133,8 +131,39 @@ public class MainScrollPane extends JScrollPane {
 			panelScrollViewport.add(lblErrorLoading);
 			e.printStackTrace();
 		}
+	}
 
-		return panelScrollViewport;
+	/**
+	 * Adds a new {@link StudentPanel} for the given {@link Student} to the
+	 * viewport.
+	 * <p>
+	 * This method dynamically inserts a new panel at the end of the viewport's list
+	 * of student panels.
+	 * 
+	 * @param student the {@link Student} to be represented by the new panel
+	 */
+	public void addStudentPanel(Student student) {
+		int currentIndex = panelScrollViewport.getComponentCount();
+		addStudentPanel(student, currentIndex);
+		panelScrollViewport.revalidate();
+		panelScrollViewport.repaint();
+	}
+
+	/**
+	 * Creates and adds a {@link StudentPanel} for the given {@link Student} at the
+	 * specified index.
+	 * <p>
+	 * The panel is added to the viewport but does not trigger revalidation or
+	 * repainting.
+	 * 
+	 * @param student the {@link Student} to be displayed in the panel
+	 * @param index   the index at which the panel is added
+	 */
+	private void addStudentPanel(Student student, int index) {
+		JPanel studentPanel = new StudentPanel(student);
+		if (index % 2 == 0)
+			studentPanel.setBackground(new Color(220, 220, 220));
+		panelScrollViewport.add(studentPanel);
 	}
 
 }

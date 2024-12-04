@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Student {
 
 	private static int uuid;
-	private int studentId;
+	private final int studentId;
 	private String firstName;
 	private String lastName;
 	private Major major;
@@ -21,9 +21,8 @@ public class Student {
 	 * Automatically generates a unique student ID using the internal {@code uuid}.
 	 * <p>
 	 * This constructor is intended for dynamically creating new students during
-	 * runtime, ensuring that each student receives a unique identifier. For
-	 * creating students from existing stored data, use the package-private
-	 * constructor.
+	 * runtime. For creating students from existing stored data, use the
+	 * package-private constructor.
 	 *
 	 * @param firstName the student's first name
 	 * @param lastName  the student's last name
@@ -31,13 +30,8 @@ public class Student {
 	 * @param year      the year the student started
 	 */
 	public Student(String firstName, String lastName, Major major, int year) {
-		this.studentId = uuid;
+		this(uuid, firstName, lastName, major, year);
 		uuid++;
-
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.major = major;
-		this.year = year;
 	}
 
 	/**
@@ -173,9 +167,7 @@ public class Student {
 	 * Compares this {@code Student} to the specified object for equality.
 	 * <p>
 	 * Two {@code Student} objects are considered equal if and only if their
-	 * {@code studentId} values are the same. This ensures that student identity is
-	 * determined solely by their unique ID, regardless of other fields like name or
-	 * major.
+	 * {@code studentId} values are the same.
 	 * 
 	 * @param obj the object to compare this {@code Student} against
 	 * @return {@code true} if the specified object is a {@code Student} with the
