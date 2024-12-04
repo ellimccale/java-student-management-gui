@@ -4,7 +4,6 @@ package app.model;
  * Represents various academic majors, each with a unique code and a
  * display-friendly name.
  * 
- * @author Aidan Reed
  * @author Elli Steck
  */
 public enum Major {
