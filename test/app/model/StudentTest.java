@@ -2,6 +2,8 @@ package app.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Year;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +19,26 @@ class StudentTest {
 	}
 
 	@Test
-	void public_student_constructor_should_initialize_all_fields() {
+	void constructor_should_throw_exception_for_null_name_fields() {
+		assertThrows(IllegalArgumentException.class,
+				() -> new Student(null, "Last", Major.CSIS, 2023),
+				"Constructor should throw exception for null first name");
+
+		assertThrows(IllegalArgumentException.class,
+				() -> new Student("First", null, Major.CSIS, 2023),
+				"Constructor should throw exception for null last name");
+	}
+
+	@Test
+	void constructor_should_throw_exception_for_invalid_academic_year() {
+		int invalidYear = Year.now().getValue() - 11; // More than 10 years ago
+		assertThrows(IllegalArgumentException.class,
+				() -> new Student("Invalid", "Year", Major.CSIS, invalidYear),
+				"Constructor should throw exception for an academic year more than 10 years ago");
+	}
+
+	@Test
+	void public_constructor_should_initialize_all_fields() {
 		assertNotNull(student, "Student object should not be null");
 		assertEquals(101014, student.getStudentId(), "Student ID should be 101014");
 		assertEquals("John", student.getFirstName(), "First name should be 'John'");
@@ -27,7 +48,7 @@ class StudentTest {
 	}
 
 	@Test
-	void package_private_student_constructor_should_initialize_all_fields_without_changing_uuid() {
+	void package_private_constructor_should_initialize_all_fields_without_changing_uuid() {
 		Student loadedStudent = new Student(101020, "Jane", "Smith", Major.BIOL, 2024);
 
 		assertNotNull(loadedStudent, "Student object should not be null");
@@ -41,7 +62,7 @@ class StudentTest {
 	}
 
 	@Test
-	void student_id_values_should_be_unique() {
+	void studentId_values_should_be_unique() {
 		Student otherStudent = new Student("Jane", "Smith", Major.BIOL, 2024);
 
 		assertEquals(101015, otherStudent.getStudentId(), "Other student ID should be 101015");
@@ -49,11 +70,24 @@ class StudentTest {
 	}
 
 	@Test
-	void student_id_values_should_increment_by_one() {
+	void studentId_values_should_increment_by_one() {
 		Student otherStudent = new Student("Alice", "Johnson", Major.ENGR, 2023);
-
 		assertTrue(otherStudent.getStudentId() > student.getStudentId(),
 				"Subsequent student ID should be greater than the first");
+	}
+
+	@Test
+	void resetUuid_should_update_uuid_and_generate_ids_from_new_value() {
+		Student.resetUuid(200001);
+		Student newStudent = new Student("New", "Student", Major.CSIS, 2023);
+
+		assertEquals(200001, newStudent.getStudentId(), "Student ID should start from the reset UUID value");
+	}
+
+	@Test
+	void equals_should_return_true_for_same_student_id() {
+		Student duplicateStudent = new Student(student.getStudentId(), "Duplicate", "Student", Major.CSIS, 2023);
+		assertEquals(student, duplicateStudent, "Students with the same ID should be equal");
 	}
 
 	@Test
