@@ -1,5 +1,6 @@
 package app.model;
 
+import java.time.Year;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ public class Student {
 	private String firstName;
 	private String lastName;
 	private Major major;
-	private int year;
+	private int academicYear;
 
 	/**
 	 * Public constructor for creating a new {@link Student} with the given details.
@@ -24,13 +25,13 @@ public class Student {
 	 * runtime. For creating students from existing stored data, use the
 	 * package-private constructor.
 	 *
-	 * @param firstName the student's first name
-	 * @param lastName  the student's last name
-	 * @param major     the student's major
-	 * @param year      the year the student started
+	 * @param firstName    the student's first name
+	 * @param lastName     the student's last name
+	 * @param major        the student's major
+	 * @param academicYear the year the student started
 	 */
-	public Student(String firstName, String lastName, Major major, int year) {
-		this(uuid, firstName, lastName, major, year);
+	public Student(String firstName, String lastName, Major major, int academicYear) {
+		this(uuid, firstName, lastName, major, academicYear);
 		uuid++;
 	}
 
@@ -43,19 +44,24 @@ public class Student {
 	 * handling data loading. For dynamically creating new students, use the public
 	 * constructor that generates a unique student ID.
 	 * 
-	 * @param studentId the student's unique identifier
-	 * @param firstName the student's first name
-	 * @param lastName  the student's last name
-	 * @param major     the student's major
-	 * @param year      the year the student started
+	 * @param studentId    the student's unique identifier
+	 * @param firstName    the student's first name
+	 * @param lastName     the student's last name
+	 * @param major        the student's major
+	 * @param academicYear the year the student started
 	 * @see StudentManager
 	 */
-	Student(int studentId, String firstName, String lastName, Major major, int year) {
+	Student(int studentId, String firstName, String lastName, Major major, int academicYear) {
+		if (academicYear < Year.now().getValue() - 10)
+			throw new IllegalArgumentException("Enrollment date must be positive and within 10 years.");
+		if (firstName == null || lastName == null || major == null)
+			throw new IllegalArgumentException("First name, last name, and major cannot be null.");
+
 		this.studentId = studentId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.major = major;
-		this.year = year;
+		this.academicYear = academicYear;
 	}
 
 	/**
@@ -137,7 +143,7 @@ public class Student {
 	 * @return the year the student started
 	 */
 	public int getYear() {
-		return year;
+		return academicYear;
 	}
 
 	/**
@@ -146,7 +152,7 @@ public class Student {
 	 * @param year the student's new starting year
 	 */
 	public void setYear(int year) {
-		this.year = year;
+		this.academicYear = year;
 	}
 
 	/**

@@ -164,6 +164,12 @@ public class Main extends JFrame {
 				mainScrollPane.getVerticalScrollBar().setValue(
 						mainScrollPane.getVerticalScrollBar().getMaximum());
 			} catch (NumberFormatException | IOException ex) {
+				System.err.println("Error creating student: Student [firstName="
+						+ fieldFirstName.getText() + ", lastName="
+						+ fieldLastName.getText() + ", major="
+						+ selectMajor.getSelectedItem() + ", year="
+						+ fieldAcademicYear.getText() + "]."
+						+ ex.getMessage());
 				ex.printStackTrace();
 			}
 
