@@ -50,7 +50,7 @@ public class MainScrollPane extends JScrollPane {
 		this.setColumnHeaderView(panelScrollHeader);
 
 		panelScrollViewport = new JPanel(new GridLayout(0, 1));
-		updatePanelScrollViewport();
+		populatePanelScrollViewport();
 		this.setViewportView(panelScrollViewport);
 	}
 
@@ -100,7 +100,7 @@ public class MainScrollPane extends JScrollPane {
 	}
 
 	/**
-	 * Creates the scrollable list of student rows, with each row represented by a
+	 * Populates the scrollable list of student rows, with each row represented by a
 	 * {@link StudentPanel}.
 	 * <p>
 	 * If an error occurs while loading the students, the panel will display an
@@ -109,9 +109,8 @@ public class MainScrollPane extends JScrollPane {
 	 * @return a {@link JPanel} containing a vertical list of {@link StudentPanel}
 	 *         objects or an error message
 	 */
-	private void updatePanelScrollViewport() {
+	private void populatePanelScrollViewport() {
 		try {
-			panelScrollViewport.removeAll();
 			Set<Student> students = StudentManager.getStudents();
 
 			if (students.isEmpty()) {
